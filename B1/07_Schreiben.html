@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>07 Schreiben - B1</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --page-bg: #f5f7fb;
+            --page-text: #1f2937;
+            --muted-text: #334155;
+            --card-bg: #ffffff;
+            --card-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.08);
+            --alpha-bg: rgba(245, 247, 251, 0.95);
+            --alpha-border: #e5e7eb;
+            --table-bg: #ffffff;
+            --table-stripe: #f8fafc;
+            --table-hover: #eaf3ff;
+        }
+
+        [data-bs-theme="dark"] {
+            --page-bg: #0f172a;
+            --page-text: #e2e8f0;
+            --muted-text: #cbd5e1;
+            --card-bg: #111827;
+            --card-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.35);
+            --alpha-bg: rgba(17, 24, 39, 0.95);
+            --alpha-border: #374151;
+            --table-bg: #111827;
+            --table-stripe: #172033;
+            --table-hover: #1f2a44;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--page-bg);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--page-text);
+        }
+
+        .content-card {
+            border: 0;
+            border-radius: 1rem;
+            box-shadow: var(--card-shadow);
+            background: var(--card-bg);
+        }
+
+        .page-header {
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .breadcrumb a {
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .alphabet-nav {
+            position: sticky;
+            top: 5rem;
+            z-index: 1020;
+            background: var(--alpha-bg);
+            border: 1px solid var(--alpha-border);
+            border-radius: 0.75rem;
+            padding: 0.75rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .markdown-content h1,
+        .markdown-content h2,
+        .markdown-content h3,
+        .markdown-content h4,
+        .markdown-content h5,
+        .markdown-content h6 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.35;
+        }
+
+        .markdown-content {
+            max-width: 78ch;
+        }
+
+        .markdown-content p,
+        .markdown-content li {
+            color: var(--muted-text);
+        }
+
+        .markdown-content table {
+            width: 100%;
+            margin: 1rem 0;
+            border-collapse: collapse;
+            display: block;
+            overflow-x: auto;
+            border-radius: 0.5rem;
+            background: var(--table-bg);
+        }
+
+        .markdown-content th,
+        .markdown-content td {
+            border: 1px solid #dee2e6;
+            padding: 0.6rem 0.75rem;
+            vertical-align: top;
+        }
+
+        .markdown-content thead th {
+            background: #0d6efd;
+            color: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        .markdown-content tbody tr:nth-child(odd) {
+            background: var(--table-stripe);
+        }
+
+        .markdown-content tbody tr:hover {
+            background: var(--table-hover);
+        }
+
+        .markdown-content code {
+            background: #f1f3f5;
+            padding: 0.15rem 0.35rem;
+            border-radius: 0.25rem;
+        }
+
+        .markdown-content pre {
+            background: #212529;
+            color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+
+        .markdown-content pre code {
+            background: transparent;
+            padding: 0;
+            color: inherit;
+        }
+
+        .site-footer {
+            font-size: 0.9rem;
+        }
+
+        .back-to-top {
+            position: fixed;
+            right: 1rem;
+            bottom: 1rem;
+            z-index: 1030;
+            display: none;
+            width: 2.8rem;
+            height: 2.8rem;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0.5rem 1rem rgba(13, 110, 253, 0.3);
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid #93c5fd;
+            outline-offset: 2px;
+        }
+
+        .theme-toggle {
+            min-width: 5.8rem;
+            height: 2.2rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 0.65rem;
+        }
+    </style>
+</head>
+<body id="top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="../index.html">Deutsch Lernen</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#siteNavbar" aria-controls="siteNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="siteNavbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Levels</a>
+                        <ul class="dropdown-menu">
+<li><a class="dropdown-item" href="../A1/index.html">A1</a></li>
+<li><a class="dropdown-item" href="../A2/index.html">A2</a></li>
+<li><a class="dropdown-item active" href="../B1/index.html">B1</a></li>
+<li><a class="dropdown-item" href="../B2/index.html">B2</a></li>
+<li><a class="dropdown-item" href="../C1/index.html">C1</a></li>
+<li><a class="dropdown-item" href="../C2/index.html">C2</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">B1 Modules</a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+<li><a class="dropdown-item" href="README.html">📖 Overview</a></li>
+<li><hr class="dropdown-divider"></li>
+<li><a class="dropdown-item" href="01_Wortschatz.html">01 Wortschatz</a></li>
+<li><a class="dropdown-item" href="02_Grammatik.html">02 Grammatik</a></li>
+<li><a class="dropdown-item" href="03_Saetze.html">03 Saetze</a></li>
+<li><a class="dropdown-item" href="04_Lesen.html">04 Lesen</a></li>
+<li><a class="dropdown-item" href="05_Hoeren.html">05 Hoeren</a></li>
+<li><a class="dropdown-item" href="06_Sprechen.html">06 Sprechen</a></li>
+<li><a class="dropdown-item active" href="07_Schreiben.html">07 Schreiben</a></li>
+<li><a class="dropdown-item" href="08_Musterpruefung.html">08 Musterpruefung</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="d-flex ms-lg-3 mt-2 mt-lg-0">
+                    <button id="themeToggle" class="btn btn-outline-light btn-sm theme-toggle" type="button" aria-label="Toggle color theme" title="Toggle color theme">🌙 Dark</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-4 py-lg-5">
+        <div class="card content-card">
+            <div class="card-body p-4 p-lg-5">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb small mb-3">
+                        <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="index.html">B1</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">07 Schreiben</li>
+                    </ol>
+                </nav>
+
+                <div class="page-header d-flex flex-wrap justify-content-between align-items-center gap-3">
+                    <h1 class="h2 mb-0">07 Schreiben</h1>
+                    <span class="badge bg-primary-subtle text-primary-emphasis border border-primary-subtle">B1</span>
+                </div>
+
+                
+
+                <div class="markdown-content">
+                    <h1 id="b1-schreiben-writing">B1 Schreiben / Writing</h1>
+<p>Schreibübungen zur Vorbereitung auf das Goethe-Zertifikat B1.<br />
+<em>Writing exercises to prepare for the Goethe-Zertifikat B1.</em></p>
+<hr />
+<h2 id="prufungsformat-exam-format">Prüfungsformat / Exam Format</h2>
+<table>
+<thead>
+<tr>
+<th>Teil / Part</th>
+<th>Aufgabe / Task</th>
+<th>Punkte / Points</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Persönliche E-Mail (ca. 80 Wörter) / Personal email (~80 words)</td>
+<td>40</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Meinung äußern: Diskussionsbeitrag (ca. 80 Wörter) / Express opinion: discussion post (~80 words)</td>
+<td>40</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Formelle Nachricht (ca. 40 Wörter) / Formal message (~40 words)</td>
+<td>20</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Dauer / Duration: 60 Minuten / minutes — 100 Punkte / points</strong></p>
+<hr />
+<h2 id="teil-1-personliche-e-mail-personal-email">Teil 1: Persönliche E-Mail / Personal Email</h2>
+<h3 id="ubung-1-exercise-1">Übung 1 / Exercise 1</h3>
+<p><strong>Aufgabe / Task:</strong> Ihr Freund Stefan hat seinen Job verloren. Schreiben Sie ihm. <em>Your friend Stefan lost his job. Write to him.</em><br />
+- Mitgefühl ausdrücken / Express sympathy<br />
+- Was würden Sie raten? / What would you advise?<br />
+- Eigene Erfahrung / Own experience</p>
+<p><strong>Musterantwort / Sample answer:</strong></p>
+<blockquote>
+<p>Lieber Stefan,<br />
+das tut mir wirklich leid! Ich kann mir vorstellen, dass das eine schwierige Situation ist. Aber jede Krise ist auch eine Chance.<br />
+An deiner Stelle würde ich die Zeit nutzen, um über meine Zukunft nachzudenken. Vielleicht wäre eine Weiterbildung gut? Als ich vor zwei Jahren meinen Job verloren habe, habe ich einen Computerkurs gemacht, und das hat mir sehr geholfen.<br />
+Lass den Kopf nicht hängen!<br />
+Liebe Grüße, [Name]</p>
+</blockquote>
+<p><em>Dear Stefan, I'm really sorry! I can imagine this is a difficult situation. But every crisis is also an opportunity. In your place, I would use the time to think about the future. Maybe further training would be good? When I lost my job two years ago, I took a computer course, and that really helped me. Keep your chin up! Best, [Name]</em></p>
+<hr />
+<h2 id="teil-2-diskussionsbeitrag-discussion-post">Teil 2: Diskussionsbeitrag / Discussion Post</h2>
+<h3 id="struktur-fur-meinungstexte-structure-for-opinion-texts">Struktur für Meinungstexte / Structure for Opinion Texts</h3>
+<ol>
+<li><strong>These / Thesis</strong> — Eigene Position klar nennen / State your position clearly</li>
+<li><strong>Argumente / Arguments</strong> — 2–3 Gründe / 2–3 reasons</li>
+<li><strong>Gegenargument / Counter-argument</strong> — Andere Seite kurz erwähnen / Briefly mention other side</li>
+<li><strong>Fazit / Conclusion</strong> — Zusammenfassung / Summary</li>
+</ol>
+<h3 id="redemittel-useful-phrases">Redemittel / Useful Phrases</h3>
+<table>
+<thead>
+<tr>
+<th>Funktion / Function</th>
+<th>Deutsch</th>
+<th>Englisch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>These / Thesis</td>
+<td>Ich bin der Meinung, dass ...</td>
+<td>I am of the opinion that ...</td>
+</tr>
+<tr>
+<td>Argument</td>
+<td>Erstens ... / Ein wichtiges Argument ist ...</td>
+<td>Firstly ... / An important argument is ...</td>
+</tr>
+<tr>
+<td>Gegenargument / Counter</td>
+<td>Andererseits ... / Man muss aber bedenken ...</td>
+<td>On the other hand ... / But one must consider ...</td>
+</tr>
+<tr>
+<td>Beispiel / Example</td>
+<td>Zum Beispiel ... / Ein gutes Beispiel ist ...</td>
+<td>For example ... / A good example is ...</td>
+</tr>
+<tr>
+<td>Fazit / Conclusion</td>
+<td>Zusammenfassend ... / Alles in allem ...</td>
+<td>In summary ... / All in all ...</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="teil-3-formelle-nachricht-formal-message">Teil 3: Formelle Nachricht / Formal Message</h2>
+<h3 id="ubung-exercise">Übung / Exercise</h3>
+<p><strong>Aufgabe / Task:</strong> Sie haben einen kaputten Drucker bestellt. Schreiben Sie an den Kundenservice. <em>You ordered a broken printer. Write to customer service.</em></p>
+<p><strong>Musterantwort / Sample answer:</strong></p>
+<blockquote>
+<p>Sehr geehrte Damen und Herren,<br />
+am 5. März habe ich einen Drucker bestellt (Bestellnr. 789456). Leider funktioniert er nicht — er druckt nur leere Seiten. Ich möchte das Gerät umtauschen oder eine Erstattung erhalten.<br />
+Mit freundlichen Grüßen, [Name]</p>
+</blockquote>
+<p><em>Dear Sir or Madam, on March 5th I ordered a printer (order no. 789456). Unfortunately it doesn't work — it only prints blank pages. I would like to exchange the device or receive a refund. Sincerely, [Name]</em></p>
+<hr />
+<h2 id="tipps-tips">Tipps / Tips</h2>
+<ol>
+<li><strong>Alle Inhaltspunkte bearbeiten.</strong> <em>Address ALL content points.</em> — Für jeden Punkt gibt es Punkte! <em>Each point earns marks!</em></li>
+<li><strong>Wortanzahl beachten.</strong> <em>Watch the word count.</em> — Nicht zu kurz, nicht zu lang. <em>Not too short, not too long.</em></li>
+<li><strong>Textsorte beachten.</strong> <em>Mind the text type.</em> — Teil 1: du, Teil 3: Sie. <em>Part 1: informal, Part 3: formal.</em></li>
+<li><strong>Abwechslungsreiche Grammatik.</strong> <em>Varied grammar.</em> — Nebensätze, Konjunktiv II, Passiv zeigen. <em>Show subordinate clauses, Subjunctive II, passive.</em></li>
+<li><strong>Korrekturlesen!</strong> <em>Proofread!</em> — 5 Minuten am Ende reservieren. <em>Reserve 5 minutes at the end.</em></li>
+</ol>
+                </div>
+
+                <footer class="site-footer mt-5 pt-4 border-top text-center text-muted">
+                    <p class="mb-1">Generated from Markdown · Deutsch B1 Learning Materials</p>
+                    <p class="mb-0">Last updated: 2026-04-20 12:32:11</p>
+                </footer>
+            </div>
+        </div>
+    </main>
+
+    <a href="#top" id="backToTop" class="btn btn-primary rounded-circle back-to-top" aria-label="Back to top">↑</a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const root = document.documentElement;
+        const themeToggleButton = document.getElementById('themeToggle');
+        const storedTheme = localStorage.getItem('theme');
+        const preferredTheme = storedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        root.setAttribute('data-bs-theme', preferredTheme);
+
+        function updateThemeButton() {
+            const isDark = root.getAttribute('data-bs-theme') === 'dark';
+            themeToggleButton.textContent = isDark ? '☀️ Light' : '🌙 Dark';
+            themeToggleButton.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+            themeToggleButton.setAttribute('title', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+        }
+
+        themeToggleButton.addEventListener('click', () => {
+            const nextTheme = root.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+            root.setAttribute('data-bs-theme', nextTheme);
+            localStorage.setItem('theme', nextTheme);
+            updateThemeButton();
+        });
+
+        updateThemeButton();
+
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTopButton.style.display = window.scrollY > 300 ? 'inline-flex' : 'none';
+        });
+    </script>
+</body>
+</html>

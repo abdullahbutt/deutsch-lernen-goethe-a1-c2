@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>06 Sprechen - A1</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --page-bg: #f5f7fb;
+            --page-text: #1f2937;
+            --muted-text: #334155;
+            --card-bg: #ffffff;
+            --card-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.08);
+            --alpha-bg: rgba(245, 247, 251, 0.95);
+            --alpha-border: #e5e7eb;
+            --table-bg: #ffffff;
+            --table-stripe: #f8fafc;
+            --table-hover: #eaf3ff;
+        }
+
+        [data-bs-theme="dark"] {
+            --page-bg: #0f172a;
+            --page-text: #e2e8f0;
+            --muted-text: #cbd5e1;
+            --card-bg: #111827;
+            --card-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.35);
+            --alpha-bg: rgba(17, 24, 39, 0.95);
+            --alpha-border: #374151;
+            --table-bg: #111827;
+            --table-stripe: #172033;
+            --table-hover: #1f2a44;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--page-bg);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--page-text);
+        }
+
+        .content-card {
+            border: 0;
+            border-radius: 1rem;
+            box-shadow: var(--card-shadow);
+            background: var(--card-bg);
+        }
+
+        .page-header {
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .breadcrumb a {
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .alphabet-nav {
+            position: sticky;
+            top: 5rem;
+            z-index: 1020;
+            background: var(--alpha-bg);
+            border: 1px solid var(--alpha-border);
+            border-radius: 0.75rem;
+            padding: 0.75rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .markdown-content h1,
+        .markdown-content h2,
+        .markdown-content h3,
+        .markdown-content h4,
+        .markdown-content h5,
+        .markdown-content h6 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.35;
+        }
+
+        .markdown-content {
+            max-width: 78ch;
+        }
+
+        .markdown-content p,
+        .markdown-content li {
+            color: var(--muted-text);
+        }
+
+        .markdown-content table {
+            width: 100%;
+            margin: 1rem 0;
+            border-collapse: collapse;
+            display: block;
+            overflow-x: auto;
+            border-radius: 0.5rem;
+            background: var(--table-bg);
+        }
+
+        .markdown-content th,
+        .markdown-content td {
+            border: 1px solid #dee2e6;
+            padding: 0.6rem 0.75rem;
+            vertical-align: top;
+        }
+
+        .markdown-content thead th {
+            background: #0d6efd;
+            color: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        .markdown-content tbody tr:nth-child(odd) {
+            background: var(--table-stripe);
+        }
+
+        .markdown-content tbody tr:hover {
+            background: var(--table-hover);
+        }
+
+        .markdown-content code {
+            background: #f1f3f5;
+            padding: 0.15rem 0.35rem;
+            border-radius: 0.25rem;
+        }
+
+        .markdown-content pre {
+            background: #212529;
+            color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+
+        .markdown-content pre code {
+            background: transparent;
+            padding: 0;
+            color: inherit;
+        }
+
+        .site-footer {
+            font-size: 0.9rem;
+        }
+
+        .back-to-top {
+            position: fixed;
+            right: 1rem;
+            bottom: 1rem;
+            z-index: 1030;
+            display: none;
+            width: 2.8rem;
+            height: 2.8rem;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0.5rem 1rem rgba(13, 110, 253, 0.3);
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid #93c5fd;
+            outline-offset: 2px;
+        }
+
+        .theme-toggle {
+            min-width: 5.8rem;
+            height: 2.2rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 0.65rem;
+        }
+    </style>
+</head>
+<body id="top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="../index.html">Deutsch Lernen</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#siteNavbar" aria-controls="siteNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="siteNavbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Levels</a>
+                        <ul class="dropdown-menu">
+<li><a class="dropdown-item active" href="../A1/index.html">A1</a></li>
+<li><a class="dropdown-item" href="../A2/index.html">A2</a></li>
+<li><a class="dropdown-item" href="../B1/index.html">B1</a></li>
+<li><a class="dropdown-item" href="../B2/index.html">B2</a></li>
+<li><a class="dropdown-item" href="../C1/index.html">C1</a></li>
+<li><a class="dropdown-item" href="../C2/index.html">C2</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">A1 Modules</a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+<li><a class="dropdown-item" href="README.html">📖 Overview</a></li>
+<li><hr class="dropdown-divider"></li>
+<li><a class="dropdown-item" href="01_Wortschatz.html">01 Wortschatz</a></li>
+<li><a class="dropdown-item" href="02_Grammatik.html">02 Grammatik</a></li>
+<li><a class="dropdown-item" href="03_Saetze.html">03 Saetze</a></li>
+<li><a class="dropdown-item" href="04_Lesen.html">04 Lesen</a></li>
+<li><a class="dropdown-item" href="05_Hoeren.html">05 Hoeren</a></li>
+<li><a class="dropdown-item active" href="06_Sprechen.html">06 Sprechen</a></li>
+<li><a class="dropdown-item" href="07_Schreiben.html">07 Schreiben</a></li>
+<li><a class="dropdown-item" href="08_Musterpruefung.html">08 Musterpruefung</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="d-flex ms-lg-3 mt-2 mt-lg-0">
+                    <button id="themeToggle" class="btn btn-outline-light btn-sm theme-toggle" type="button" aria-label="Toggle color theme" title="Toggle color theme">🌙 Dark</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-4 py-lg-5">
+        <div class="card content-card">
+            <div class="card-body p-4 p-lg-5">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb small mb-3">
+                        <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="index.html">A1</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">06 Sprechen</li>
+                    </ol>
+                </nav>
+
+                <div class="page-header d-flex flex-wrap justify-content-between align-items-center gap-3">
+                    <h1 class="h2 mb-0">06 Sprechen</h1>
+                    <span class="badge bg-primary-subtle text-primary-emphasis border border-primary-subtle">A1</span>
+                </div>
+
+                
+
+                <div class="markdown-content">
+                    <h1 id="a1-sprechen-speaking">A1 Sprechen / Speaking</h1>
+<p>Übungen zur Vorbereitung auf den mündlichen Teil des Goethe-Zertifikats A1.<br />
+<em>Exercises to prepare for the speaking part of the Goethe-Zertifikat A1.</em></p>
+<hr />
+<h2 id="prufungsformat-exam-format">Prüfungsformat / Exam Format</h2>
+<table>
+<thead>
+<tr>
+<th>Teil / Part</th>
+<th>Aufgabe / Task</th>
+<th>Dauer / Duration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Sich vorstellen / Introduce yourself</td>
+<td>ca. 3 Min</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Fragen stellen und beantworten (Wortkarten) / Ask and answer questions (word cards)</td>
+<td>ca. 6 Min</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Bitten formulieren und reagieren (Bildkarten) / Make requests and respond (picture cards)</td>
+<td>ca. 6 Min</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Gruppenprüfung: 2–4 Teilnehmer / Group exam: 2–4 participants, ca. 15 Minuten / minutes</strong></p>
+<hr />
+<h2 id="teil-1-sich-vorstellen-introduce-yourself">Teil 1: Sich vorstellen / Introduce Yourself</h2>
+<h3 id="was-sie-sagen-mussen-what-you-need-to-say">Was Sie sagen müssen / What you need to say:</h3>
+<p><strong>Name:</strong> Ich heiße ... / Mein Name ist ... <em>(My name is ...)</em></p>
+<p><strong>Herkunft / Origin:</strong> Ich komme aus ... <em>(I come from ...)</em></p>
+<p><strong>Wohnort / Residence:</strong> Ich wohne in ... <em>(I live in ...)</em></p>
+<p><strong>Alter / Age:</strong> Ich bin ... Jahre alt. <em>(I am ... years old.)</em></p>
+<p><strong>Sprachen / Languages:</strong> Ich spreche ... <em>(I speak ...)</em> / Meine Muttersprache ist ... <em>(My native language is ...)</em></p>
+<p><strong>Beruf / Profession:</strong> Ich bin ... (Ingenieur, Studentin, Lehrerin) <em>(I am ... engineer, student, teacher)</em> / Ich arbeite als ... bei ... <em>(I work as ... at ...)</em></p>
+<p><strong>Familie / Family:</strong> Ich bin verheiratet / ledig. <em>(I am married / single.)</em> / Ich habe ... Kinder. <em>(I have ... children.)</em></p>
+<p><strong>Hobbys:</strong> In meiner Freizeit ... <em>(In my free time ...)</em> / Ich ... gern. <em>(I like to ...)</em></p>
+<h3 id="beispiel-vorstellung-example-introduction">Beispiel-Vorstellung / Example Introduction:</h3>
+<blockquote>
+<p>Hallo! Mein Name ist Priya Sharma. Ich komme aus Indien, aus Mumbai. Jetzt wohne ich in Berlin. Ich bin 28 Jahre alt. Ich bin Ingenieurin von Beruf und arbeite bei einer IT-Firma. Ich spreche Hindi, Englisch und ein bisschen Deutsch. Ich bin verheiratet und habe ein Kind. In meiner Freizeit lese ich gern und koche ich gern.</p>
+</blockquote>
+<p><em>Hello! My name is Priya Sharma. I come from India, from Mumbai. Now I live in Berlin. I am 28 years old. I am an engineer and work at an IT company. I speak Hindi, English, and a little German. I am married and have one child. In my free time I like to read and cook.</em></p>
+<hr />
+<h2 id="teil-2-fragen-und-antworten-questions-and-answers">Teil 2: Fragen und Antworten / Questions and Answers</h2>
+<p>In diesem Teil ziehen Sie Wortkarten und stellen Fragen dazu. Die anderen Teilnehmer antworten.<br />
+<em>In this part you draw word cards and ask questions about them. The other participants answer.</em></p>
+<h3 id="ubungskarten-practice-cards">Übungskarten / Practice Cards:</h3>
+<p><strong>ESSEN / FOOD</strong><br />
+- Was essen Sie gern? <em>(What do you like to eat?)</em> → Ich esse gern Pizza.<br />
+- Kochen Sie gern? <em>(Do you like cooking?)</em> → Ja, ich koche gern. / Nein, nicht so gern.<br />
+- Was essen Sie zum Frühstück? <em>(What do you eat for breakfast?)</em> → Zum Frühstück esse ich Brot.</p>
+<p><strong>WOHNEN / LIVING</strong><br />
+- Wo wohnen Sie? <em>(Where do you live?)</em> → Ich wohne in Berlin.<br />
+- Wie ist Ihre Wohnung? <em>(What is your apartment like?)</em> → Meine Wohnung ist groß/klein/schön.<br />
+- Wohnen Sie allein? <em>(Do you live alone?)</em> → Ja/Nein, ich wohne mit meiner Familie.</p>
+<p><strong>FREIZEIT / FREE TIME</strong><br />
+- Was machen Sie in Ihrer Freizeit? <em>(What do you do in your free time?)</em> → Ich lese gern / spiele Fußball.<br />
+- Treiben Sie Sport? <em>(Do you do sports?)</em> → Ja, ich schwimme gern. / Nein.</p>
+<p><strong>ARBEIT / WORK</strong><br />
+- Was sind Sie von Beruf? <em>(What is your profession?)</em> → Ich bin Lehrer von Beruf.<br />
+- Wo arbeiten Sie? <em>(Where do you work?)</em> → Ich arbeite bei/in ...<br />
+- Wie lange arbeiten Sie? <em>(How long do you work?)</em> → Ich arbeite von 9 bis 17 Uhr.</p>
+<p><strong>REISEN / TRAVEL</strong><br />
+- Reisen Sie gern? <em>(Do you like traveling?)</em> → Ja, ich reise sehr gern!<br />
+- Wohin möchten Sie reisen? <em>(Where would you like to travel?)</em> → Ich möchte nach ... reisen.</p>
+<hr />
+<h2 id="teil-3-bitten-formulieren-making-requests">Teil 3: Bitten formulieren / Making Requests</h2>
+<p>In diesem Teil sehen Sie Bildkarten und müssen Bitten formulieren.<br />
+<em>In this part you see picture cards and need to make requests.</em></p>
+<h3 id="nutzliche-redemittel-useful-phrases">Nützliche Redemittel / Useful Phrases:</h3>
+<p><strong>Bitten / Requests:</strong><br />
+- Können Sie mir bitte helfen? <em>(Can you please help me?)</em><br />
+- Kann ich bitte ...? <em>(Can I please ...?)</em><br />
+- Ich hätte gern ... <em>(I would like ...)</em><br />
+- Darf ich ...? <em>(May I ...?)</em></p>
+<p><strong>Reagieren / Responding:</strong><br />
+- Ja, natürlich! <em>(Yes, of course!)</em><br />
+- Ja, gerne! <em>(Yes, gladly!)</em><br />
+- Tut mir leid, das geht leider nicht. <em>(Sorry, that's not possible.)</em></p>
+<h3 id="ubungssituationen-practice-situations">Übungssituationen / Practice Situations:</h3>
+<p><strong>Im Deutschkurs / In German class:</strong><br />
+- Können Sie bitte das Fenster öffnen? <em>(Can you please open the window?)</em><br />
+- Kann ich bitte einen Kugelschreiber haben? <em>(Can I please have a pen?)</em><br />
+- Können Sie das bitte wiederholen? <em>(Can you please repeat that?)</em></p>
+<p><strong>Im Restaurant:</strong><br />
+- Können wir bitte die Speisekarte haben? <em>(Can we please have the menu?)</em><br />
+- Kann ich bitte ein Glas Wasser bekommen? <em>(Can I please get a glass of water?)</em><br />
+- Die Rechnung, bitte! <em>(The bill, please!)</em></p>
+<hr />
+<h2 id="allgemeine-sprechtipps-general-speaking-tips">Allgemeine Sprechtipps / General Speaking Tips</h2>
+<ol>
+<li><strong>Sprechen Sie langsam und deutlich.</strong> <em>Speak slowly and clearly.</em></li>
+<li><strong>Kurze Sätze sind OK.</strong> <em>Short sentences are perfectly fine at A1.</em></li>
+<li><strong>Keine Panik bei Fehlern.</strong> <em>Don't panic about mistakes.</em></li>
+<li><strong>Blickkontakt halten.</strong> <em>Maintain eye contact.</em></li>
+<li><strong>Wenn Sie etwas nicht verstehen:</strong> <em>If you don't understand something:</em></li>
+<li>"Entschuldigung, können Sie das bitte wiederholen?" <em>(Excuse me, can you please repeat that?)</em></li>
+<li>"Wie bitte?" <em>(Pardon?)</em></li>
+<li>"Können Sie bitte langsam sprechen?" <em>(Can you please speak slowly?)</em></li>
+<li>"Was bedeutet ...?" <em>(What does ... mean?)</em></li>
+</ol>
+                </div>
+
+                <footer class="site-footer mt-5 pt-4 border-top text-center text-muted">
+                    <p class="mb-1">Generated from Markdown · Deutsch A1 Learning Materials</p>
+                    <p class="mb-0">Last updated: 2026-04-20 12:32:11</p>
+                </footer>
+            </div>
+        </div>
+    </main>
+
+    <a href="#top" id="backToTop" class="btn btn-primary rounded-circle back-to-top" aria-label="Back to top">↑</a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const root = document.documentElement;
+        const themeToggleButton = document.getElementById('themeToggle');
+        const storedTheme = localStorage.getItem('theme');
+        const preferredTheme = storedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        root.setAttribute('data-bs-theme', preferredTheme);
+
+        function updateThemeButton() {
+            const isDark = root.getAttribute('data-bs-theme') === 'dark';
+            themeToggleButton.textContent = isDark ? '☀️ Light' : '🌙 Dark';
+            themeToggleButton.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+            themeToggleButton.setAttribute('title', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+        }
+
+        themeToggleButton.addEventListener('click', () => {
+            const nextTheme = root.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+            root.setAttribute('data-bs-theme', nextTheme);
+            localStorage.setItem('theme', nextTheme);
+            updateThemeButton();
+        });
+
+        updateThemeButton();
+
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTopButton.style.display = window.scrollY > 300 ? 'inline-flex' : 'none';
+        });
+    </script>
+</body>
+</html>

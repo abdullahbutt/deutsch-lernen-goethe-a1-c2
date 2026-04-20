@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>07 Schreiben - A2</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --page-bg: #f5f7fb;
+            --page-text: #1f2937;
+            --muted-text: #334155;
+            --card-bg: #ffffff;
+            --card-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.08);
+            --alpha-bg: rgba(245, 247, 251, 0.95);
+            --alpha-border: #e5e7eb;
+            --table-bg: #ffffff;
+            --table-stripe: #f8fafc;
+            --table-hover: #eaf3ff;
+        }
+
+        [data-bs-theme="dark"] {
+            --page-bg: #0f172a;
+            --page-text: #e2e8f0;
+            --muted-text: #cbd5e1;
+            --card-bg: #111827;
+            --card-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.35);
+            --alpha-bg: rgba(17, 24, 39, 0.95);
+            --alpha-border: #374151;
+            --table-bg: #111827;
+            --table-stripe: #172033;
+            --table-hover: #1f2a44;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--page-bg);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--page-text);
+        }
+
+        .content-card {
+            border: 0;
+            border-radius: 1rem;
+            box-shadow: var(--card-shadow);
+            background: var(--card-bg);
+        }
+
+        .page-header {
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .breadcrumb a {
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .alphabet-nav {
+            position: sticky;
+            top: 5rem;
+            z-index: 1020;
+            background: var(--alpha-bg);
+            border: 1px solid var(--alpha-border);
+            border-radius: 0.75rem;
+            padding: 0.75rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .markdown-content h1,
+        .markdown-content h2,
+        .markdown-content h3,
+        .markdown-content h4,
+        .markdown-content h5,
+        .markdown-content h6 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.35;
+        }
+
+        .markdown-content {
+            max-width: 78ch;
+        }
+
+        .markdown-content p,
+        .markdown-content li {
+            color: var(--muted-text);
+        }
+
+        .markdown-content table {
+            width: 100%;
+            margin: 1rem 0;
+            border-collapse: collapse;
+            display: block;
+            overflow-x: auto;
+            border-radius: 0.5rem;
+            background: var(--table-bg);
+        }
+
+        .markdown-content th,
+        .markdown-content td {
+            border: 1px solid #dee2e6;
+            padding: 0.6rem 0.75rem;
+            vertical-align: top;
+        }
+
+        .markdown-content thead th {
+            background: #0d6efd;
+            color: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        .markdown-content tbody tr:nth-child(odd) {
+            background: var(--table-stripe);
+        }
+
+        .markdown-content tbody tr:hover {
+            background: var(--table-hover);
+        }
+
+        .markdown-content code {
+            background: #f1f3f5;
+            padding: 0.15rem 0.35rem;
+            border-radius: 0.25rem;
+        }
+
+        .markdown-content pre {
+            background: #212529;
+            color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+
+        .markdown-content pre code {
+            background: transparent;
+            padding: 0;
+            color: inherit;
+        }
+
+        .site-footer {
+            font-size: 0.9rem;
+        }
+
+        .back-to-top {
+            position: fixed;
+            right: 1rem;
+            bottom: 1rem;
+            z-index: 1030;
+            display: none;
+            width: 2.8rem;
+            height: 2.8rem;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0.5rem 1rem rgba(13, 110, 253, 0.3);
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid #93c5fd;
+            outline-offset: 2px;
+        }
+
+        .theme-toggle {
+            min-width: 5.8rem;
+            height: 2.2rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 0.65rem;
+        }
+    </style>
+</head>
+<body id="top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="../index.html">Deutsch Lernen</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#siteNavbar" aria-controls="siteNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="siteNavbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Levels</a>
+                        <ul class="dropdown-menu">
+<li><a class="dropdown-item" href="../A1/index.html">A1</a></li>
+<li><a class="dropdown-item active" href="../A2/index.html">A2</a></li>
+<li><a class="dropdown-item" href="../B1/index.html">B1</a></li>
+<li><a class="dropdown-item" href="../B2/index.html">B2</a></li>
+<li><a class="dropdown-item" href="../C1/index.html">C1</a></li>
+<li><a class="dropdown-item" href="../C2/index.html">C2</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">A2 Modules</a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+<li><a class="dropdown-item" href="README.html">📖 Overview</a></li>
+<li><hr class="dropdown-divider"></li>
+<li><a class="dropdown-item" href="01_Wortschatz.html">01 Wortschatz</a></li>
+<li><a class="dropdown-item" href="02_Grammatik.html">02 Grammatik</a></li>
+<li><a class="dropdown-item" href="03_Saetze.html">03 Saetze</a></li>
+<li><a class="dropdown-item" href="04_Lesen.html">04 Lesen</a></li>
+<li><a class="dropdown-item" href="05_Hoeren.html">05 Hoeren</a></li>
+<li><a class="dropdown-item" href="06_Sprechen.html">06 Sprechen</a></li>
+<li><a class="dropdown-item active" href="07_Schreiben.html">07 Schreiben</a></li>
+<li><a class="dropdown-item" href="08_Musterpruefung.html">08 Musterpruefung</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="d-flex ms-lg-3 mt-2 mt-lg-0">
+                    <button id="themeToggle" class="btn btn-outline-light btn-sm theme-toggle" type="button" aria-label="Toggle color theme" title="Toggle color theme">🌙 Dark</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-4 py-lg-5">
+        <div class="card content-card">
+            <div class="card-body p-4 p-lg-5">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb small mb-3">
+                        <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="index.html">A2</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">07 Schreiben</li>
+                    </ol>
+                </nav>
+
+                <div class="page-header d-flex flex-wrap justify-content-between align-items-center gap-3">
+                    <h1 class="h2 mb-0">07 Schreiben</h1>
+                    <span class="badge bg-primary-subtle text-primary-emphasis border border-primary-subtle">A2</span>
+                </div>
+
+                
+
+                <div class="markdown-content">
+                    <h1 id="a2-schreiben-writing">A2 Schreiben / Writing</h1>
+<p>Schreibübungen zur Vorbereitung auf das Goethe-Zertifikat A2.<br />
+<em>Writing exercises to prepare for the Goethe-Zertifikat A2.</em></p>
+<hr />
+<h2 id="prufungsformat-exam-format">Prüfungsformat / Exam Format</h2>
+<table>
+<thead>
+<tr>
+<th>Teil / Part</th>
+<th>Aufgabe / Task</th>
+<th>Punkte / Points</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>SMS oder kurze Nachricht (ca. 30–40 Wörter) / SMS or short message</td>
+<td>15</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Persönliche oder halbformelle Mitteilung (ca. 50–60 Wörter) / Personal or semi-formal message</td>
+<td>30</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Dauer / Duration: 30 Minuten / minutes</strong></p>
+<hr />
+<h2 id="teil-1-kurze-nachrichten-short-messages">Teil 1: Kurze Nachrichten / Short Messages</h2>
+<h3 id="ubung-1-treffen-verschieben-postpone-meeting">Übung 1: Treffen verschieben / Postpone Meeting</h3>
+<p><strong>Aufgabe / Task:</strong> Sie wollten sich heute mit Lena treffen. Sie können nicht. <em>You wanted to meet Lena today. You can't.</em><br />
+Schreiben Sie / Write: Entschuldigung <em>(apology)</em>, Grund <em>(reason)</em>, neuer Vorschlag <em>(new suggestion)</em>.</p>
+<p><strong>Musterantwort / Sample answer:</strong></p>
+<blockquote>
+<p>Liebe Lena,<br />
+es tut mir leid, aber ich kann heute leider nicht kommen. Ich muss länger arbeiten. Können wir uns statt heute morgen Abend treffen? Passt dir 18 Uhr im Café am Marktplatz?<br />
+LG, [Name]</p>
+</blockquote>
+<p><em>Dear Lena, I'm sorry, but unfortunately I can't come today. I have to work longer. Can we meet tomorrow evening instead of today? Does 6 PM at the café on the market square work for you? Best, [Name]</em></p>
+<hr />
+<h2 id="teil-2-personliche-mitteilungen-personal-messages">Teil 2: Persönliche Mitteilungen / Personal Messages</h2>
+<h3 id="ubung-4-brief-an-einen-freund-letter-to-a-friend">Übung 4: Brief an einen Freund / Letter to a Friend</h3>
+<p><strong>Aufgabe / Task:</strong> Ihr Freund Marco kommt nächste Woche zu Besuch. <em>Your friend Marco is visiting next week.</em><br />
+Schreiben Sie / Write: Wann abholen? <em>(When to pick up?)</em> Was planen? <em>(What to plan?)</em> Was mitbringen? <em>(What to bring?)</em></p>
+<p><strong>Musterantwort / Sample answer:</strong></p>
+<blockquote>
+<p>Lieber Marco,<br />
+ich freue mich sehr, dass du nächste Woche kommst! Sag mir bitte, wann dein Zug ankommt, dann hole ich dich am Bahnhof ab.<br />
+Am Samstag können wir die Altstadt besichtigen und abends in ein nettes Restaurant gehen. Bring bitte warme Kleidung mit, weil es hier noch ziemlich kalt ist.<br />
+Bis bald! Viele Grüße, [Name]</p>
+</blockquote>
+<p><em>Dear Marco, I'm very happy you're coming next week! Please tell me when your train arrives, then I'll pick you up at the station. On Saturday we can visit the old town and go to a nice restaurant in the evening. Please bring warm clothes, because it's still quite cold here. See you soon! Best, [Name]</em></p>
+<hr />
+<h2 id="wichtige-redemittel-important-phrases">Wichtige Redemittel / Important Phrases</h2>
+<h3 id="informelle-nachrichten-informal-messages">Informelle Nachrichten / Informal Messages</h3>
+<table>
+<thead>
+<tr>
+<th>Deutsch</th>
+<th>Englisch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Liebe/r ...</td>
+<td>Dear ...</td>
+</tr>
+<tr>
+<td>Danke für deine Nachricht!</td>
+<td>Thanks for your message!</td>
+</tr>
+<tr>
+<td>Es tut mir leid.</td>
+<td>I'm sorry.</td>
+</tr>
+<tr>
+<td>Hast du Lust ...?</td>
+<td>Do you feel like ...?</td>
+</tr>
+<tr>
+<td>Viele/Liebe Grüße</td>
+<td>Best regards</td>
+</tr>
+</tbody>
+</table>
+<h3 id="formelle-nachrichten-formal-messages">Formelle Nachrichten / Formal Messages</h3>
+<table>
+<thead>
+<tr>
+<th>Deutsch</th>
+<th>Englisch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sehr geehrte Damen und Herren</td>
+<td>Dear Sir or Madam</td>
+</tr>
+<tr>
+<td>Ich schreibe Ihnen, weil ...</td>
+<td>I'm writing to you because ...</td>
+</tr>
+<tr>
+<td>Könnten Sie bitte ...?</td>
+<td>Could you please ...?</td>
+</tr>
+<tr>
+<td>Mit freundlichen Grüßen</td>
+<td>Sincerely</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="tipps-tips">Tipps / Tips</h2>
+<ol>
+<li><strong>Alle Punkte bearbeiten!</strong> <em>Address ALL points!</em> — Jeder Inhaltspunkt gibt Punkte. <em>Each content point earns marks.</em></li>
+<li><strong>Wörter zählen.</strong> <em>Count words.</em> — Nicht zu wenig, nicht zu viel. <em>Not too few, not too many.</em></li>
+<li><strong>Anrede + Gruß.</strong> <em>Greeting + closing.</em> — Immer dabei! <em>Always include them!</em></li>
+<li><strong>du/Sie richtig.</strong> <em>du/Sie correctly.</em> — Informell = du, Formell = Sie.</li>
+<li><strong>Korrektur lesen.</strong> <em>Proofread.</em> — Am Ende nochmal lesen! <em>Read again at the end!</em></li>
+</ol>
+                </div>
+
+                <footer class="site-footer mt-5 pt-4 border-top text-center text-muted">
+                    <p class="mb-1">Generated from Markdown · Deutsch A2 Learning Materials</p>
+                    <p class="mb-0">Last updated: 2026-04-20 12:32:11</p>
+                </footer>
+            </div>
+        </div>
+    </main>
+
+    <a href="#top" id="backToTop" class="btn btn-primary rounded-circle back-to-top" aria-label="Back to top">↑</a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const root = document.documentElement;
+        const themeToggleButton = document.getElementById('themeToggle');
+        const storedTheme = localStorage.getItem('theme');
+        const preferredTheme = storedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        root.setAttribute('data-bs-theme', preferredTheme);
+
+        function updateThemeButton() {
+            const isDark = root.getAttribute('data-bs-theme') === 'dark';
+            themeToggleButton.textContent = isDark ? '☀️ Light' : '🌙 Dark';
+            themeToggleButton.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+            themeToggleButton.setAttribute('title', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+        }
+
+        themeToggleButton.addEventListener('click', () => {
+            const nextTheme = root.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+            root.setAttribute('data-bs-theme', nextTheme);
+            localStorage.setItem('theme', nextTheme);
+            updateThemeButton();
+        });
+
+        updateThemeButton();
+
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTopButton.style.display = window.scrollY > 300 ? 'inline-flex' : 'none';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>README - A1</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --page-bg: #f5f7fb;
+            --page-text: #1f2937;
+            --muted-text: #334155;
+            --card-bg: #ffffff;
+            --card-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.08);
+            --alpha-bg: rgba(245, 247, 251, 0.95);
+            --alpha-border: #e5e7eb;
+            --table-bg: #ffffff;
+            --table-stripe: #f8fafc;
+            --table-hover: #eaf3ff;
+        }
+
+        [data-bs-theme="dark"] {
+            --page-bg: #0f172a;
+            --page-text: #e2e8f0;
+            --muted-text: #cbd5e1;
+            --card-bg: #111827;
+            --card-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.35);
+            --alpha-bg: rgba(17, 24, 39, 0.95);
+            --alpha-border: #374151;
+            --table-bg: #111827;
+            --table-stripe: #172033;
+            --table-hover: #1f2a44;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--page-bg);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--page-text);
+        }
+
+        .content-card {
+            border: 0;
+            border-radius: 1rem;
+            box-shadow: var(--card-shadow);
+            background: var(--card-bg);
+        }
+
+        .page-header {
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .breadcrumb a {
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .alphabet-nav {
+            position: sticky;
+            top: 5rem;
+            z-index: 1020;
+            background: var(--alpha-bg);
+            border: 1px solid var(--alpha-border);
+            border-radius: 0.75rem;
+            padding: 0.75rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .markdown-content h1,
+        .markdown-content h2,
+        .markdown-content h3,
+        .markdown-content h4,
+        .markdown-content h5,
+        .markdown-content h6 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.35;
+        }
+
+        .markdown-content {
+            max-width: 78ch;
+        }
+
+        .markdown-content p,
+        .markdown-content li {
+            color: var(--muted-text);
+        }
+
+        .markdown-content table {
+            width: 100%;
+            margin: 1rem 0;
+            border-collapse: collapse;
+            display: block;
+            overflow-x: auto;
+            border-radius: 0.5rem;
+            background: var(--table-bg);
+        }
+
+        .markdown-content th,
+        .markdown-content td {
+            border: 1px solid #dee2e6;
+            padding: 0.6rem 0.75rem;
+            vertical-align: top;
+        }
+
+        .markdown-content thead th {
+            background: #0d6efd;
+            color: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        .markdown-content tbody tr:nth-child(odd) {
+            background: var(--table-stripe);
+        }
+
+        .markdown-content tbody tr:hover {
+            background: var(--table-hover);
+        }
+
+        .markdown-content code {
+            background: #f1f3f5;
+            padding: 0.15rem 0.35rem;
+            border-radius: 0.25rem;
+        }
+
+        .markdown-content pre {
+            background: #212529;
+            color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+
+        .markdown-content pre code {
+            background: transparent;
+            padding: 0;
+            color: inherit;
+        }
+
+        .site-footer {
+            font-size: 0.9rem;
+        }
+
+        .back-to-top {
+            position: fixed;
+            right: 1rem;
+            bottom: 1rem;
+            z-index: 1030;
+            display: none;
+            width: 2.8rem;
+            height: 2.8rem;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0.5rem 1rem rgba(13, 110, 253, 0.3);
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid #93c5fd;
+            outline-offset: 2px;
+        }
+
+        .theme-toggle {
+            min-width: 5.8rem;
+            height: 2.2rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 0.65rem;
+        }
+    </style>
+</head>
+<body id="top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="../index.html">Deutsch Lernen</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#siteNavbar" aria-controls="siteNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="siteNavbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Levels</a>
+                        <ul class="dropdown-menu">
+<li><a class="dropdown-item active" href="../A1/index.html">A1</a></li>
+<li><a class="dropdown-item" href="../A2/index.html">A2</a></li>
+<li><a class="dropdown-item" href="../B1/index.html">B1</a></li>
+<li><a class="dropdown-item" href="../B2/index.html">B2</a></li>
+<li><a class="dropdown-item" href="../C1/index.html">C1</a></li>
+<li><a class="dropdown-item" href="../C2/index.html">C2</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">A1 Modules</a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+<li><a class="dropdown-item active" href="README.html">📖 Overview</a></li>
+<li><hr class="dropdown-divider"></li>
+<li><a class="dropdown-item" href="01_Wortschatz.html">01 Wortschatz</a></li>
+<li><a class="dropdown-item" href="02_Grammatik.html">02 Grammatik</a></li>
+<li><a class="dropdown-item" href="03_Saetze.html">03 Saetze</a></li>
+<li><a class="dropdown-item" href="04_Lesen.html">04 Lesen</a></li>
+<li><a class="dropdown-item" href="05_Hoeren.html">05 Hoeren</a></li>
+<li><a class="dropdown-item" href="06_Sprechen.html">06 Sprechen</a></li>
+<li><a class="dropdown-item" href="07_Schreiben.html">07 Schreiben</a></li>
+<li><a class="dropdown-item" href="08_Musterpruefung.html">08 Musterpruefung</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="d-flex ms-lg-3 mt-2 mt-lg-0">
+                    <button id="themeToggle" class="btn btn-outline-light btn-sm theme-toggle" type="button" aria-label="Toggle color theme" title="Toggle color theme">🌙 Dark</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-4 py-lg-5">
+        <div class="card content-card">
+            <div class="card-body p-4 p-lg-5">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb small mb-3">
+                        <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="index.html">A1</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">README</li>
+                    </ol>
+                </nav>
+
+                <div class="page-header d-flex flex-wrap justify-content-between align-items-center gap-3">
+                    <h1 class="h2 mb-0">README</h1>
+                    <span class="badge bg-primary-subtle text-primary-emphasis border border-primary-subtle">A1</span>
+                </div>
+
+                
+
+                <div class="markdown-content">
+                    <h1 id="a1-goethe-zertifikat-a1-start-deutsch-1">A1 — Goethe-Zertifikat A1: Start Deutsch 1</h1>
+<h2 id="ubersicht-overview">Übersicht / Overview</h2>
+<p>Das Goethe-Zertifikat A1 bestätigt, dass Sie sich auf einfachste Weise auf Deutsch verständigen können. Es bescheinigt, dass Sie einfache Fragen, Anweisungen und Mitteilungen verstehen und darauf reagieren können.</p>
+<p><em>The Goethe-Zertifikat A1 confirms that you can communicate in the simplest way in German. It certifies that you can understand and respond to simple questions, instructions, and messages.</em></p>
+<p><strong>Empfohlene Lernzeit / Recommended study time</strong>: 80–200 Unterrichtsstunden / teaching hours</p>
+<h2 id="prufungsstruktur-exam-structure">Prüfungsstruktur / Exam Structure</h2>
+<table>
+<thead>
+<tr>
+<th>Modul / Module</th>
+<th>Dauer / Duration</th>
+<th>Punkte / Points</th>
+<th>Bestehen / Pass</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lesen / Reading</td>
+<td>25 min</td>
+<td>25</td>
+<td>min. 15</td>
+</tr>
+<tr>
+<td>Hören / Listening</td>
+<td>20 min</td>
+<td>25</td>
+<td>min. 15</td>
+</tr>
+<tr>
+<td>Schreiben / Writing</td>
+<td>20 min</td>
+<td>25</td>
+<td>min. 15</td>
+</tr>
+<tr>
+<td>Sprechen / Speaking</td>
+<td>15 min</td>
+<td>25</td>
+<td>min. 15</td>
+</tr>
+<tr>
+<td><strong>Gesamt / Total</strong></td>
+<td><strong>80 min</strong></td>
+<td><strong>100</strong></td>
+<td><strong>min. 60</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="lernplan-study-plan">Lernplan / Study Plan</h2>
+<h3 id="woche-14-grundlagen-weeks-14-basics">Woche 1–4: Grundlagen / Weeks 1–4: Basics</h3>
+<ul>
+<li>Alphabet und Aussprache / Alphabet and pronunciation</li>
+<li>Sich vorstellen (Name, Alter, Herkunft) / Introducing yourself (name, age, origin)</li>
+<li>Zahlen 0–100 / Numbers 0–100</li>
+<li>Begrüßung und Verabschiedung / Greetings and farewells</li>
+<li>Grundlegende Grammatik: Artikel, Personalpronomen / Basic grammar: articles, personal pronouns</li>
+</ul>
+<h3 id="woche-58-alltag-weeks-58-everyday-life">Woche 5–8: Alltag / Weeks 5–8: Everyday Life</h3>
+<ul>
+<li>Familie und Freunde / Family and friends</li>
+<li>Essen und Trinken / Food and drink</li>
+<li>Einkaufen / Shopping</li>
+<li>Wohnung und Möbel / Apartment and furniture</li>
+<li>Grammatik: Präsens, Ja/Nein-Fragen, W-Fragen / Grammar: present tense, yes/no questions, W-questions</li>
+</ul>
+<h3 id="woche-912-erweiterte-themen-weeks-912-expanded-topics">Woche 9–12: Erweiterte Themen / Weeks 9–12: Expanded Topics</h3>
+<ul>
+<li>Tagesablauf und Uhrzeit / Daily routine and time</li>
+<li>Freizeit und Hobbys / Leisure and hobbies</li>
+<li>Körper und Gesundheit / Body and health</li>
+<li>Verkehr und Orientierung / Traffic and directions</li>
+<li>Grammatik: Modalverben, Imperativ, Akkusativ / Grammar: modal verbs, imperative, accusative</li>
+</ul>
+<h3 id="woche-1316-prufungsvorbereitung-weeks-1316-exam-preparation">Woche 13–16: Prüfungsvorbereitung / Weeks 13–16: Exam Preparation</h3>
+<ul>
+<li>Musterprüfungen üben / Practice with sample exams</li>
+<li>Schreiben: Formulare ausfüllen, kurze Mitteilungen / Writing: fill in forms, short messages</li>
+<li>Sprechen: Sich vorstellen, Fragen stellen und beantworten / Speaking: introduce yourself, ask and answer questions</li>
+<li>Wiederholung aller Themen / Review of all topics</li>
+</ul>
+<h2 id="dateien-files">Dateien / Files</h2>
+<ol>
+<li><a href="./01_Wortschatz.md">Wortschatz</a> — Vocabulary (ca. 650 Wörter / words)</li>
+<li><a href="./02_Grammatik.md">Grammatik</a> — Grammar rules and exercises</li>
+<li><a href="./03_Saetze.md">Sätze</a> — Example sentences A–Z</li>
+<li><a href="./04_Lesen.md">Lesen</a> — Reading exercises</li>
+<li><a href="./05_Hoeren.md">Hören</a> — Listening exercises</li>
+<li><a href="./06_Sprechen.md">Sprechen</a> — Speaking practice</li>
+<li><a href="./07_Schreiben.md">Schreiben</a> — Writing practice</li>
+<li><a href="./08_Musterpruefung.md">Musterprüfung</a> — Sample exam</li>
+</ol>
+                </div>
+
+                <footer class="site-footer mt-5 pt-4 border-top text-center text-muted">
+                    <p class="mb-1">Generated from Markdown · Deutsch A1 Learning Materials</p>
+                    <p class="mb-0">Last updated: 2026-04-20 12:32:11</p>
+                </footer>
+            </div>
+        </div>
+    </main>
+
+    <a href="#top" id="backToTop" class="btn btn-primary rounded-circle back-to-top" aria-label="Back to top">↑</a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const root = document.documentElement;
+        const themeToggleButton = document.getElementById('themeToggle');
+        const storedTheme = localStorage.getItem('theme');
+        const preferredTheme = storedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        root.setAttribute('data-bs-theme', preferredTheme);
+
+        function updateThemeButton() {
+            const isDark = root.getAttribute('data-bs-theme') === 'dark';
+            themeToggleButton.textContent = isDark ? '☀️ Light' : '🌙 Dark';
+            themeToggleButton.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+            themeToggleButton.setAttribute('title', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+        }
+
+        themeToggleButton.addEventListener('click', () => {
+            const nextTheme = root.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+            root.setAttribute('data-bs-theme', nextTheme);
+            localStorage.setItem('theme', nextTheme);
+            updateThemeButton();
+        });
+
+        updateThemeButton();
+
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTopButton.style.display = window.scrollY > 300 ? 'inline-flex' : 'none';
+        });
+    </script>
+</body>
+</html>
