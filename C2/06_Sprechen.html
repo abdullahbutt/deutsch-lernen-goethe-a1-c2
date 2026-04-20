@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
@@ -203,58 +203,63 @@
             C1:['01_Wortschatz.html','02_Grammatik.html','03_Saetze.html','04_Lesen.html','05_Hoeren.html','06_Sprechen.html','07_Schreiben.html','08_Musterpruefung.html'],
             C2:['01_Wortschatz.html','02_Grammatik.html','03_Saetze.html','04_Lesen.html','05_Hoeren.html','06_Sprechen.html','07_Schreiben.html','08_Musterpruefung.html']
         };
-        var labels = ['01 Wortschatz','02 Grammatik','03 Sätze','04 Lesen','05 Hören','06 Sprechen','07 Schreiben','08 Musterprüfung'];
+        var labels = ['01 Wortschatz','02 Grammatik','03 Sätze','04 Lesen','05 Hören','06 Sprechen','07 Schreiben','08 Musterprüfung'];        var headerFallback = '<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm sticky-top"><div class="container"><a class="navbar-brand" href="BASE/index.html">🇩🇪 Deutsch Lernen</a><button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#siteNavbar" aria-controls="siteNavbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="siteNavbar"><ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-2" id="nav-main-links"><li class="nav-item"><a class="nav-link" href="BASE/index.html" id="nav-home">Home</a></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Levels</a><ul class="dropdown-menu"><li><a class="dropdown-item" href="BASE/A1/index.html" data-level="A1">A1 – Beginner</a></li><li><a class="dropdown-item" href="BASE/A2/index.html" data-level="A2">A2 – Elementary</a></li><li><hr class="dropdown-divider"></li><li><a class="dropdown-item" href="BASE/B1/index.html" data-level="B1">B1 – Intermediate</a></li><li><a class="dropdown-item" href="BASE/B2/index.html" data-level="B2">B2 – Upper-Intermediate</a></li><li><hr class="dropdown-divider"></li><li><a class="dropdown-item" href="BASE/C1/index.html" data-level="C1">C1 – Advanced</a></li><li><a class="dropdown-item" href="BASE/C2/index.html" data-level="C2">C2 – Mastery</a></li></ul></li></ul><div class="d-flex ms-lg-3 mt-2 mt-lg-0"><button id="themeToggle" class="btn btn-outline-light btn-sm theme-toggle" type="button" aria-label="Toggle color theme" title="Toggle color theme">🌙 Dark</button></div></div></div></nav>';
+
+        function renderHeader(html) {
+            html = html.replace(/BASE\//g, prefix);
+            document.getElementById('header-placeholder').innerHTML = html;
+
+            if (currentLevel) {
+                document.querySelectorAll('.dropdown-item[data-level]').forEach(function (el) {
+                    if (el.getAttribute('data-level') === currentLevel) {
+                        el.classList.add('active');
+                        el.setAttribute('aria-current', 'page');
+                    }
+                });
+
+                var modFiles = modules[currentLevel];
+                var ul = '<ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">';
+                ul += '<li><a class="dropdown-item" href="README.html">📖 Overview</a></li>';
+                ul += '<li><hr class="dropdown-divider"></li>';
+                modFiles.forEach(function (f, i) {
+                    ul += '<li><a class="dropdown-item" href="' + f + '">' + labels[i] + '</a></li>';
+                });
+                ul += '</ul>';
+
+                var li = document.createElement('li');
+                li.className = 'nav-item dropdown';
+                li.innerHTML = '<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">' + currentLevel + ' Modules</a>' + ul;
+                var nav = document.getElementById('nav-main-links');
+                if (nav) nav.appendChild(li);
+            } else {
+                var h = document.getElementById('nav-home');
+                if (h) {
+                    h.classList.add('active');
+                    h.setAttribute('aria-current', 'page');
+                }
+            }
+
+            var btn = document.getElementById('themeToggle');
+            if (btn) {
+                function syncBtn() {
+                    var dark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+                    btn.textContent = dark ? '☀️ Light' : '🌙 Dark';
+                    btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+                }
+                syncBtn();
+                btn.addEventListener('click', function () {
+                    var next = document.documentElement.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+                    document.documentElement.setAttribute('data-bs-theme', next);
+                    localStorage.setItem('theme', next);
+                    syncBtn();
+                });
+            }
+        }
 
         fetch(prefix + 'header.html')
-            .then(function (r) { return r.text(); })
-            .then(function (html) {
-                html = html.replace(/BASE\//g, prefix);
-                document.getElementById('header-placeholder').innerHTML = html;
-
-                // Active level in Levels dropdown
-                if (currentLevel) {
-                    document.querySelectorAll('.dropdown-item[data-level]').forEach(function (el) {
-                        if (el.getAttribute('data-level') === currentLevel) {
-                            el.classList.add('active');
-                            el.setAttribute('aria-current', 'page');
-                        }
-                    });
-                    // Inject level-modules dropdown
-                    var modFiles = modules[currentLevel];
-                    var ul = '<ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">';
-                    ul += '<li><a class="dropdown-item" href="README.html">\uD83D\uDCD6 Overview</a></li>';
-                    ul += '<li><hr class="dropdown-divider"></li>';
-                    modFiles.forEach(function (f, i) {
-                        ul += '<li><a class="dropdown-item" href="' + f + '">' + labels[i] + '</a></li>';
-                    });
-                    ul += '</ul>';
-                    var li = document.createElement('li');
-                    li.className = 'nav-item dropdown';
-                    li.innerHTML = '<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">' + currentLevel + ' Modules</a>' + ul;
-                    var nav = document.getElementById('nav-main-links');
-                    if (nav) nav.appendChild(li);
-                } else {
-                    var h = document.getElementById('nav-home');
-                    if (h) { h.classList.add('active'); h.setAttribute('aria-current', 'page'); }
-                }
-
-                // Wire theme toggle
-                var btn = document.getElementById('themeToggle');
-                if (btn) {
-                    function syncBtn() {
-                        var dark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
-                        btn.textContent = dark ? '\u2600\uFE0F Light' : '\uD83C\uDF19 Dark';
-                        btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
-                    }
-                    syncBtn();
-                    btn.addEventListener('click', function () {
-                        var next = document.documentElement.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
-                        document.documentElement.setAttribute('data-bs-theme', next);
-                        localStorage.setItem('theme', next);
-                        syncBtn();
-                    });
-                }
-            }).catch(function () {});
+            .then(function (r) { return r.ok ? r.text() : Promise.reject(new Error('header fetch failed')); })
+            .then(function (html) { renderHeader(html); })
+            .catch(function () { renderHeader(headerFallback); });
     })();
     </script>
 
@@ -416,10 +421,11 @@
         (function() {
             var parts = window.location.pathname.split('/').filter(Boolean);
             var prefix = parts.length <= 1 ? '' : '../';
+            var footerFallback = '<footer class="site-footer mt-5 pt-4 border-top text-center text-muted small"><div class="container pb-2"><p class="mb-1 fw-semibold">Deutsch Lernen — Goethe-Zertifikat A1 to C2</p><p class="mb-1">Official certification materials for German language proficiency</p><div class="d-flex justify-content-center gap-3 flex-wrap mb-2"><a href="https://www.goethe.de" class="text-muted text-decoration-none" target="_blank" rel="noopener">Goethe-Institut ↗</a><a href="https://github.com/innorfui/deutsch-lernen-goethe-a1-c2" class="text-muted text-decoration-none" target="_blank" rel="noopener">GitHub ↗</a></div><p class="mb-0 opacity-75">Generated: 2026-04-20</p></div></footer>';
             fetch(prefix + 'footer.html')
-                .then(function(r) { return r.text(); })
+                .then(function(r) { return r.ok ? r.text() : Promise.reject(new Error('footer fetch failed')); })
                 .then(function(html) { document.getElementById('footer-placeholder').innerHTML = html; })
-                .catch(function() {});
+                .catch(function() { document.getElementById('footer-placeholder').innerHTML = footerFallback; });
         })();
     </script>
 </body>
