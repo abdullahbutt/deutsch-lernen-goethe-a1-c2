@@ -60,7 +60,7 @@
             text-decoration: none;
         }
 
-        .breadcrumb a:hover {
+                .breadcrumb a:hover {
             text-decoration: underline;
         }
 
@@ -73,6 +73,48 @@
             border-radius: 0.75rem;
             padding: 0.75rem;
             backdrop-filter: blur(4px);
+        }
+
+        .jump-layout {
+            display: block;
+        }
+
+        .jump-links {
+            align-items: center;
+        }
+
+        @media (min-width: 992px) {
+            .jump-layout {
+                display: grid;
+                grid-template-columns: 4rem minmax(0, 1fr);
+                gap: 1rem;
+                align-items: start;
+            }
+
+            .alphabet-nav {
+                top: 6rem;
+                width: 100%;
+                margin-bottom: 0 !important;
+            }
+
+            .alphabet-nav .jump-links {
+                display: flex !important;
+                flex-direction: column;
+                gap: 0.4rem !important;
+            }
+
+            .alphabet-nav .btn {
+                width: 2.2rem;
+                padding: 0.2rem 0;
+            }
+
+            .jump-layout .markdown-content {
+                max-width: none;
+            }
+        }
+
+        .markdown-content h2[id] {
+            scroll-margin-top: 10.5rem;
         }
 
         .markdown-content h1,
@@ -279,7 +321,8 @@
                     <span class="badge bg-primary-subtle text-primary-emphasis border border-primary-subtle">B2</span>
                 </div>
 
-                <section class="alphabet-nav mb-4"><p class="small text-muted mb-2">Quick jump:</p><div class="d-flex flex-wrap gap-2"><a href="#a" class="btn btn-sm btn-outline-primary">A</a><a href="#b" class="btn btn-sm btn-outline-primary">B</a><a href="#d" class="btn btn-sm btn-outline-primary">D</a><a href="#e" class="btn btn-sm btn-outline-primary">E</a><a href="#f" class="btn btn-sm btn-outline-primary">F</a><a href="#g" class="btn btn-sm btn-outline-primary">G</a><a href="#h" class="btn btn-sm btn-outline-primary">H</a><a href="#i" class="btn btn-sm btn-outline-primary">I</a><a href="#j" class="btn btn-sm btn-outline-primary">J</a><a href="#k" class="btn btn-sm btn-outline-primary">K</a><a href="#l" class="btn btn-sm btn-outline-primary">L</a><a href="#m" class="btn btn-sm btn-outline-primary">M</a><a href="#n" class="btn btn-sm btn-outline-primary">N</a><a href="#o" class="btn btn-sm btn-outline-primary">O</a><a href="#s" class="btn btn-sm btn-outline-primary">S</a><a href="#t" class="btn btn-sm btn-outline-primary">T</a><a href="#u" class="btn btn-sm btn-outline-primary">U</a><a href="#v" class="btn btn-sm btn-outline-primary">V</a><a href="#w" class="btn btn-sm btn-outline-primary">W</a><a href="#z" class="btn btn-sm btn-outline-primary">Z</a></div></section>
+                <div class="jump-layout">
+                <section class="alphabet-nav mb-4"><p class="small text-muted mb-2">Quick jump:</p><div class="jump-links d-flex flex-wrap gap-2"><a href="#a" class="btn btn-sm btn-outline-primary">A</a><a href="#b" class="btn btn-sm btn-outline-primary">B</a><a href="#d" class="btn btn-sm btn-outline-primary">D</a><a href="#e" class="btn btn-sm btn-outline-primary">E</a><a href="#f" class="btn btn-sm btn-outline-primary">F</a><a href="#g" class="btn btn-sm btn-outline-primary">G</a><a href="#h" class="btn btn-sm btn-outline-primary">H</a><a href="#i" class="btn btn-sm btn-outline-primary">I</a><a href="#j" class="btn btn-sm btn-outline-primary">J</a><a href="#k" class="btn btn-sm btn-outline-primary">K</a><a href="#l" class="btn btn-sm btn-outline-primary">L</a><a href="#m" class="btn btn-sm btn-outline-primary">M</a><a href="#n" class="btn btn-sm btn-outline-primary">N</a><a href="#o" class="btn btn-sm btn-outline-primary">O</a><a href="#s" class="btn btn-sm btn-outline-primary">S</a><a href="#t" class="btn btn-sm btn-outline-primary">T</a><a href="#u" class="btn btn-sm btn-outline-primary">U</a><a href="#v" class="btn btn-sm btn-outline-primary">V</a><a href="#w" class="btn btn-sm btn-outline-primary">W</a><a href="#z" class="btn btn-sm btn-outline-primary">Z</a></div></section>
 
                 <div class="markdown-content">
                     <h1 id="b2-satze-von-a-bis-z-sentences-from-a-to-z">B2 Sätze von A bis Z / Sentences from A to Z</h1>
@@ -375,8 +418,7 @@
 <li><strong>Zugunsten einer nachhaltigen Entwicklung sollten kurzfristige Profitinteressen zurückgestellt werden.</strong> — In favor of sustainable development, short-term profit interests should take a back seat.</li>
 </ol>
                 </div>
-
-                    <div id="footer-placeholder"></div>
+                </div>
             </div>
         </div>
     </main>
