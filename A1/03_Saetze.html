@@ -649,16 +649,27 @@
             var links = Array.from(nav.querySelectorAll('.jump-links a.btn'));
             links.forEach(function (l) { l.style.display = ''; });
             if (window.innerWidth < 992 || links.length <= THRESHOLD) return;
-            var overflow = links.slice(THRESHOLD);
-            overflow.forEach(function (l) { l.style.display = 'none'; });
+            var firstBatch = links.slice(0, THRESHOLD);
+            var lastBatch = links.slice(THRESHOLD);
             var moreBtn = document.createElement('button');
             moreBtn.className = 'btn btn-sm btn-outline-secondary jump-more-btn';
             moreBtn.textContent = '\u2026';
-            moreBtn.title = 'Show all';
-            moreBtn.addEventListener('click', function () {
-                overflow.forEach(function (l) { l.style.display = ''; });
-                moreBtn.remove();
-            });
+            moreBtn.title = 'Show more buttons';
+            var isExpanded = false;
+            var toggleDisplay = function () {
+                isExpanded = !isExpanded;
+                if (isExpanded) {
+                    firstBatch.forEach(function (l) { l.style.display = 'none'; });
+                    lastBatch.forEach(function (l) { l.style.display = ''; });
+                    moreBtn.title = 'Show first buttons';
+                } else {
+                    firstBatch.forEach(function (l) { l.style.display = ''; });
+                    lastBatch.forEach(function (l) { l.style.display = 'none'; });
+                    moreBtn.title = 'Show more buttons';
+                }
+            };
+            moreBtn.addEventListener('click', toggleDisplay);
+            lastBatch.forEach(function (l) { l.style.display = 'none'; });
             nav.querySelector('.jump-links').appendChild(moreBtn);
         }
 
