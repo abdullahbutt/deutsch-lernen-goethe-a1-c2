@@ -75,6 +75,48 @@
             backdrop-filter: blur(4px);
         }
 
+        .jump-layout {
+            display: block;
+        }
+
+        .jump-links {
+            align-items: center;
+        }
+
+        @media (min-width: 992px) {
+            .jump-layout {
+                display: grid;
+                grid-template-columns: 4rem minmax(0, 1fr);
+                gap: 1rem;
+                align-items: start;
+            }
+
+            .alphabet-nav {
+                top: 6rem;
+                width: 100%;
+                margin-bottom: 0 !important;
+            }
+
+            .alphabet-nav .jump-links {
+                display: flex !important;
+                flex-direction: column;
+                gap: 0.4rem !important;
+            }
+
+            .alphabet-nav .btn {
+                width: 2.2rem;
+                padding: 0.2rem 0;
+            }
+
+            .jump-layout .markdown-content {
+                max-width: none;
+            }
+        }
+
+        .markdown-content h2[id] {
+            scroll-margin-top: 10.5rem;
+        }
+
         .markdown-content h1,
         .markdown-content h2,
         .markdown-content h3,
@@ -279,7 +321,24 @@
                     <span class="badge bg-primary-subtle text-primary-emphasis border border-primary-subtle">B1</span>
                 </div>
 
-                
+                <div class="jump-layout">
+                <section class="alphabet-nav mb-4">
+                    <p class="small text-muted mb-2">Quick jump:</p>
+                    <div class="jump-links d-flex flex-wrap gap-2">
+                        <a href="#" data-section="1" class="btn btn-sm btn-outline-primary">1</a>
+                        <a href="#" data-section="2" class="btn btn-sm btn-outline-primary">2</a>
+                        <a href="#" data-section="3" class="btn btn-sm btn-outline-primary">3</a>
+                        <a href="#" data-section="4" class="btn btn-sm btn-outline-primary">4</a>
+                        <a href="#" data-section="5" class="btn btn-sm btn-outline-primary">5</a>
+                        <a href="#" data-section="6" class="btn btn-sm btn-outline-primary">6</a>
+                        <a href="#" data-section="7" class="btn btn-sm btn-outline-primary">7</a>
+                        <a href="#" data-section="8" class="btn btn-sm btn-outline-primary">8</a>
+                        <a href="#" data-section="9" class="btn btn-sm btn-outline-primary">9</a>
+                        <a href="#" data-section="10" class="btn btn-sm btn-outline-primary">10</a>
+                        <a href="#" data-section="11" class="btn btn-sm btn-outline-primary">11</a>
+                        <a href="#" data-section="12" class="btn btn-sm btn-outline-primary">12</a>
+                    </div>
+                </section>
 
                 <div class="markdown-content">
                     <h1 id="b1-grammatik-grammar">B1 Grammatik / Grammar</h1>
@@ -535,6 +594,7 @@
 <li>Man muss die Hausaufgaben machen. → <strong>Die Hausaufgaben müssen gemacht werden.</strong> <em>(The homework must be done.)</em></li>
 </ol>
                 </div>
+                </div>
 
                     <div id="footer-placeholder"></div>
             </div>
@@ -544,10 +604,21 @@
     <a href="#top" id="backToTop" class="btn btn-primary rounded-circle back-to-top" aria-label="Back to top">↑</a>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>        root.setAttribute('data-bs-theme', preferredTheme);
+    <script>
         const backToTopButton = document.getElementById('backToTop');
         window.addEventListener('scroll', () => {
             backToTopButton.style.display = window.scrollY > 300 ? 'inline-flex' : 'none';
+        });
+
+        document.querySelectorAll('.jump-links a[data-section]').forEach((link) => {
+            const number = link.getAttribute('data-section');
+            const heading = document.querySelector('h2[id^="' + number + '-"]');
+            if (heading) {
+                link.setAttribute('href', '#' + heading.id);
+            } else {
+                link.classList.add('disabled');
+                link.setAttribute('aria-disabled', 'true');
+            }
         });
     </script>
     <script>
