@@ -322,19 +322,7 @@
                 </div>
 
                 <div class="jump-layout">
-                <section class="alphabet-nav mb-4">
-                    <p class="small text-muted mb-2">Quick jump:</p>
-                    <div class="jump-links d-flex flex-wrap gap-2">
-                        <a href="#" data-section="1" class="btn btn-sm btn-outline-primary">1</a>
-                        <a href="#" data-section="2" class="btn btn-sm btn-outline-primary">2</a>
-                        <a href="#" data-section="3" class="btn btn-sm btn-outline-primary">3</a>
-                        <a href="#" data-section="4" class="btn btn-sm btn-outline-primary">4</a>
-                        <a href="#" data-section="5" class="btn btn-sm btn-outline-primary">5</a>
-                        <a href="#" data-section="6" class="btn btn-sm btn-outline-primary">6</a>
-                        <a href="#" data-section="7" class="btn btn-sm btn-outline-primary">7</a>
-                        <a href="#" data-section="8" class="btn btn-sm btn-outline-primary">8</a>
-                    </div>
-                </section>
+                <div id="jump-bar-placeholder"></div>
 
                 <div class="markdown-content">
                     <h1 id="c2-grammatik-grammar">C2 Grammatik / Grammar</h1>
@@ -571,16 +559,60 @@ Ausklammerung: Ich habe gestern gesprochen <strong>mit meiner Mutter, in Berlin,
             backToTopButton.style.display = window.scrollY > 300 ? 'inline-flex' : 'none';
         });
 
-        document.querySelectorAll('.jump-links a[data-section]').forEach((link) => {
-            const number = link.getAttribute('data-section');
-            const heading = document.querySelector('h2[id^="' + number + '-"]');
-            if (heading) {
-                link.setAttribute('href', '#' + heading.id);
-            } else {
-                link.classList.add('disabled');
-                link.setAttribute('aria-disabled', 'true');
-            }
-        });
+        function setupJumpCollapse() {
+            var THRESHOLD = 8;
+            var nav = document.querySelector('.alphabet-nav');
+            if (!nav) return;
+            var existing = nav.querySelector('.jump-more-btn');
+            if (existing) existing.remove();
+            var links = Array.from(nav.querySelectorAll('.jump-links a.btn'));
+            links.forEach(function (l) { l.style.display = ''; });
+            if (window.innerWidth < 992 || links.length <= THRESHOLD) return;
+            var overflow = links.slice(THRESHOLD);
+            overflow.forEach(function (l) { l.style.display = 'none'; });
+            var moreBtn = document.createElement('button');
+            moreBtn.className = 'btn btn-sm btn-outline-secondary jump-more-btn';
+            moreBtn.textContent = '\u2026';
+            moreBtn.title = 'Show all';
+            moreBtn.addEventListener('click', function () {
+                overflow.forEach(function (l) { l.style.display = ''; });
+                moreBtn.remove();
+            });
+            nav.querySelector('.jump-links').appendChild(moreBtn);
+        }
+
+        window.addEventListener('resize', setupJumpCollapse);
+
+        (function () {
+            var parts = window.location.pathname.split('/').filter(Boolean);
+            var prefix = parts.length <= 1 ? '' : '../';
+            fetch(prefix + 'jump_grammatik.html')
+                .then(function (r) { return r.ok ? r.text() : Promise.reject(); })
+                .then(function (html) {
+                    document.getElementById('jump-bar-placeholder').innerHTML = html;
+                    document.querySelectorAll('.jump-links a[data-section]').forEach(function (link) {
+                        var number = link.getAttribute('data-section');
+                        var heading = document.querySelector('h2[id^="' + number + '-"]');
+                        if (heading) {
+                            link.setAttribute('href', '#' + heading.id);
+                        } else {
+                            link.classList.add('disabled');
+                            link.setAttribute('aria-disabled', 'true');
+                        }
+                    });
+                    setupJumpCollapse();
+                })
+                .catch(function () {
+                    var buttons = '';
+                    document.querySelectorAll('h2[id]').forEach(function (h) {
+                        var m = h.id.match(/^(\d+)-/);
+                        if (m) { buttons += '<a href="#' + h.id + '" data-section="' + m[1] + '" class="btn btn-sm btn-outline-primary">' + m[1] + '</a>'; }
+                    });
+                    document.getElementById('jump-bar-placeholder').innerHTML =
+                        '<section class="alphabet-nav mb-4"><p class="small text-muted mb-2">Quick jump:</p><div class="jump-links d-flex flex-wrap gap-2">' + buttons + '</div></section>';
+                    setupJumpCollapse();
+                });
+        })();
     </script>
     <script>
         (function() {

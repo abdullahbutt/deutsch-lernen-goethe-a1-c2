@@ -330,7 +330,7 @@
                 </div>
 
                 <div class="jump-layout">
-                <section class="alphabet-nav mb-4"><p class="small text-muted mb-2">Quick jump:</p><div class="jump-links d-flex flex-wrap gap-2"><a href="#a" class="btn btn-sm btn-outline-primary">A</a><a href="#b" class="btn btn-sm btn-outline-primary">B</a><a href="#d" class="btn btn-sm btn-outline-primary">D</a><a href="#e" class="btn btn-sm btn-outline-primary">E</a><a href="#f" class="btn btn-sm btn-outline-primary">F</a><a href="#g" class="btn btn-sm btn-outline-primary">G</a><a href="#h" class="btn btn-sm btn-outline-primary">H</a><a href="#j" class="btn btn-sm btn-outline-primary">J</a><a href="#k" class="btn btn-sm btn-outline-primary">K</a><a href="#l" class="btn btn-sm btn-outline-primary">L</a><a href="#m" class="btn btn-sm btn-outline-primary">M</a><a href="#n" class="btn btn-sm btn-outline-primary">N</a><a href="#o" class="btn btn-sm btn-outline-primary">O</a><a href="#r" class="btn btn-sm btn-outline-primary">R</a><a href="#s" class="btn btn-sm btn-outline-primary">S</a><a href="#t" class="btn btn-sm btn-outline-primary">T</a><a href="#u" class="btn btn-sm btn-outline-primary">U</a><a href="#v" class="btn btn-sm btn-outline-primary">V</a><a href="#w" class="btn btn-sm btn-outline-primary">W</a><a href="#z" class="btn btn-sm btn-outline-primary">Z</a></div></section>
+                <div id="jump-bar-placeholder"></div>
 
                 <div class="markdown-content">
                     <h1 id="b1-satze-von-a-bis-z-sentences-from-a-to-z">B1 Sätze von A bis Z / Sentences from A to Z</h1>
@@ -445,30 +445,52 @@
             backToTopButton.style.display = window.scrollY > 300 ? 'inline-flex' : 'none';
         });
 
+        function setupJumpCollapse() {
+            var THRESHOLD = 8;
+            var nav = document.querySelector('.alphabet-nav');
+            if (!nav) return;
+            var existing = nav.querySelector('.jump-more-btn');
+            if (existing) existing.remove();
+            var links = Array.from(nav.querySelectorAll('.jump-links a.btn'));
+            links.forEach(function (l) { l.style.display = ''; });
+            if (window.innerWidth < 992 || links.length <= THRESHOLD) return;
+            var overflow = links.slice(THRESHOLD);
+            overflow.forEach(function (l) { l.style.display = 'none'; });
+            var moreBtn = document.createElement('button');
+            moreBtn.className = 'btn btn-sm btn-outline-secondary jump-more-btn';
+            moreBtn.textContent = '\u2026';
+            moreBtn.title = 'Show all';
+            moreBtn.addEventListener('click', function () {
+                overflow.forEach(function (l) { l.style.display = ''; });
+                moreBtn.remove();
+            });
+            nav.querySelector('.jump-links').appendChild(moreBtn);
+        }
+
+        window.addEventListener('resize', setupJumpCollapse);
+
         (function () {
-            function setupJumpCollapse() {
-                var THRESHOLD = 8;
-                var nav = document.querySelector('.alphabet-nav');
-                if (!nav) return;
-                var existing = nav.querySelector('.jump-more-btn');
-                if (existing) existing.remove();
-                var links = Array.from(nav.querySelectorAll('.jump-links a.btn'));
-                links.forEach(function (l) { l.style.display = ''; });
-                if (window.innerWidth < 992 || links.length <= THRESHOLD) return;
-                var overflow = links.slice(THRESHOLD);
-                overflow.forEach(function (l) { l.style.display = 'none'; });
-                var moreBtn = document.createElement('button');
-                moreBtn.className = 'btn btn-sm btn-outline-secondary jump-more-btn';
-                moreBtn.textContent = '\u2026';
-                moreBtn.title = 'Show all';
-                moreBtn.addEventListener('click', function () {
-                    overflow.forEach(function (l) { l.style.display = ''; });
-                    moreBtn.remove();
+            var parts = window.location.pathname.split('/').filter(Boolean);
+            var prefix = parts.length <= 1 ? '' : '../';
+            fetch(prefix + 'jump_saetze.html')
+                .then(function (r) { return r.ok ? r.text() : Promise.reject(); })
+                .then(function (html) {
+                    document.getElementById('jump-bar-placeholder').innerHTML = html;
+                    document.querySelectorAll('.jump-links a[href^="#"]').forEach(function (link) {
+                        var id = link.getAttribute('href').substring(1);
+                        if (!document.getElementById(id)) { link.remove(); }
+                    });
+                    setupJumpCollapse();
+                })
+                .catch(function () {
+                    var buttons = '';
+                    document.querySelectorAll('h2[id]').forEach(function (h) {
+                        if (/^[a-z]$/.test(h.id)) { buttons += '<a href="#' + h.id + '" class="btn btn-sm btn-outline-primary">' + h.id.toUpperCase() + '</a>'; }
+                    });
+                    document.getElementById('jump-bar-placeholder').innerHTML =
+                        '<section class="alphabet-nav mb-4"><p class="small text-muted mb-2">Quick jump:</p><div class="jump-links d-flex flex-wrap gap-2">' + buttons + '</div></section>';
+                    setupJumpCollapse();
                 });
-                nav.querySelector('.jump-links').appendChild(moreBtn);
-            }
-            setupJumpCollapse();
-            window.addEventListener('resize', setupJumpCollapse);
         })();
     </script>
     <script>
